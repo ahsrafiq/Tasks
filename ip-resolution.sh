@@ -27,20 +27,24 @@ echo
 echo "----------------------------------------------------------------"
 echo "Sublist3r is Startig"
 # sublister command
-sublist3r -d $b -o domains.txt
+sublist3r -d $b -o sub-domains.txt
 echo
 echo "----------------------------------------------------------------" 
 echo
 echo "Please wait while we are saving your ip address resolution results obtained from sub-domains"
-input="/home/ahsaankhatri/midExam/domains.txt"
+input="/home/ahsaankhatri/midExam/sub-domains.txt"
 while IFS= read -r line
 do
-nslookup $line >> /home/ahsaankhatri/midExam/addresses.txt
+nslookup $line >> addresses.txt
 done < "$input"
 echo
-echo "Your output is saved in a text file THANK YOU!"
+echo "Your output is saved in a text file"
 echo "-----------------------------------------------------------------"
 echo
+echo "We have saved unique IP addresses to another text file, named unique-ip.txt"
+sort addresses.txt | uniq -d | grep "Address" > unique-ip.txt
+echo
+echo "-----------------------------------------------------------------"
 elif [ $a -eq 0 ] ;
 then 
 echo "Sad to know you are not willing to use me :("
